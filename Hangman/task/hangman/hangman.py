@@ -4,9 +4,7 @@ import string
 alphabet_string = string.ascii_lowercase
 alphabet_list = list(alphabet_string)
 
-
 print('H A N G M A N')
-status = input('Type "play" to play the game, "exit" to quit: ')
 
 
 def main():
@@ -25,7 +23,7 @@ def main():
 
         if '-' not in word_on_screen:
             print('''You guessed the word!
-    You survived!''')
+You survived!''')
             break
 
         user_input = input('Input a letter: ')
@@ -44,10 +42,12 @@ def main():
             all_letters.append(user_input)
 
         if user_input in word:
-            x = word.index(user_input)
-            word_on_screen = list(word_on_screen)
-            word_on_screen[x] = user_input
-            word_on_screen = ''.join(word_on_screen)
+            x = [i for i in range(len(word)) if word.startswith(user_input, i)]
+
+            for i in x:
+                word_on_screen = list(word_on_screen)
+                word_on_screen[i] = user_input
+                word_on_screen = ''.join(word_on_screen)
         else:
             print("That letter doesn't appear in the word")
             lives -= 1
@@ -55,5 +55,5 @@ def main():
         print('You lost!')
 
 
-if status == 'play':
+while input('Type "play" to play the game, "exit" to quit: ') == 'play':
     main()
